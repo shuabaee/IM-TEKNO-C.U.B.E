@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-label="Laboratory portal illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#560013"/>
+      <stop offset="0.55" stop-color="#7A0019"/>
+      <stop offset="1" stop-color="#A24514"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff7de"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="1.8" fill="#A56554" opacity="0.26"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="420" rx="32" fill="url(#bg)"/>
+  <rect width="900" height="420" rx="32" fill="url(#dots)"/>
+  <circle cx="105" cy="318" r="88" fill="#FDB515" opacity="0.22"/>
+  <circle cx="776" cy="74" r="96" fill="#FDB515" opacity="0.2"/>
+
+  <g transform="translate(92 70)">
+    <rect x="0" y="0" width="390" height="236" rx="18" fill="url(#card)"/>
+    <rect x="22" y="20" width="346" height="28" rx="14" fill="#FBE7AE"/>
+    <rect x="22" y="66" width="86" height="126" rx="16" fill="#FFF0C2"/>
+    <rect x="126" y="66" width="96" height="56" rx="16" fill="#7A0019" opacity="0.9"/>
+    <rect x="238" y="66" width="130" height="56" rx="16" fill="#E9EDF2"/>
+    <rect x="126" y="136" width="116" height="56" rx="16" fill="#F9E7B8"/>
+    <rect x="258" y="136" width="110" height="56" rx="16" fill="#E9EDF2"/>
+    <rect x="22" y="206" width="346" height="10" rx="5" fill="#E4D7BE"/>
+    <rect x="37" y="82" width="56" height="10" rx="5" fill="#7A0019" opacity="0.85"/>
+    <rect x="37" y="106" width="38" height="38" rx="10" fill="#F9D77B"/>
+    <rect x="37" y="152" width="56" height="10" rx="5" fill="#CABCA3"/>
+    <rect x="146" y="82" width="54" height="14" rx="7" fill="#ffffff" opacity="0.9"/>
+    <rect x="146" y="104" width="42" height="8" rx="4" fill="#F5C950" opacity="0.82"/>
+    <rect x="258" y="82" width="88" height="12" rx="6" fill="#7A0019" opacity="0.2"/>
+    <rect x="258" y="102" width="72" height="8" rx="4" fill="#7A0019" opacity="0.12"/>
+    <rect x="146" y="152" width="72" height="12" rx="6" fill="#7A0019" opacity="0.88"/>
+    <rect x="258" y="152" width="72" height="12" rx="6" fill="#7A0019" opacity="0.18"/>
+  </g>
+
+  <g transform="translate(538 86)">
+    <rect x="0" y="68" width="178" height="164" rx="20" fill="#fff7de"/>
+    <rect x="22" y="92" width="58" height="58" rx="16" fill="#7A0019"/>
+    <path d="M40 121h23M51 110v23" stroke="#FDB515" stroke-width="8" stroke-linecap="round"/>
+    <rect x="98" y="98" width="58" height="10" rx="5" fill="#7A0019" opacity="0.86"/>
+    <rect x="98" y="118" width="42" height="10" rx="5" fill="#C6BCA9"/>
+    <rect x="98" y="152" width="46" height="46" rx="14" fill="#FBE7AE"/>
+    <rect x="110" y="164" width="22" height="22" rx="7" fill="#7A0019" opacity="0.88"/>
+    <rect x="38" y="250" width="130" height="16" rx="8" fill="#FFF2CC"/>
+    <path d="M36 55c18-28 64-26 79 1 9 16 7 36-8 57l-28 40-48-1 33-49c6-9 7-17 3-24-7-13-22-14-31-2" fill="none" stroke="#FDB515" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M127 55c18-28 64-26 79 1 9 16 7 36-8 57l-28 40-48-1 33-49c6-9 7-17 3-24-7-13-22-14-31-2" fill="none" stroke="#fff7de" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  </g>
+</svg>

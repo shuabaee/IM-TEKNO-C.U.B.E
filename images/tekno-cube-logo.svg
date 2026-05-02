@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="TEKNO CUBE logo">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#FDB515"/>
+      <stop offset="1" stop-color="#FFE08A"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" fill="#7A0019"/>
+  <path d="M30 42 60 25l30 17v36L60 95 30 78z" fill="url(#g)" stroke="#fff" stroke-width="4"/>
+  <path d="M30 42 60 59l30-17M60 59v36" fill="none" stroke="#7A0019" stroke-width="5" stroke-linejoin="round"/>
+  <text x="60" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#7A0019">TC</text>
+</svg>
