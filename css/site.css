@@ -194,7 +194,8 @@ main { min-height: calc(100vh - 145px); }
     gap: 8px;
     border: 0;
     border-radius: 13px;
-    padding: 13px 18px;
+    padding: 13px 100px;
+    font-size: 16px;
     font-weight: 900;
     cursor: pointer;
     transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
@@ -202,7 +203,11 @@ main { min-height: calc(100vh - 145px); }
 }
 .btn:hover { transform: translateY(-1px); }
 .btn-primary { background: var(--maroon); color: #fff; box-shadow: 0 10px 24px rgba(122,0,25,.22); }
-.btn-gold { background: var(--gold); color: var(--maroon-dark); box-shadow: 0 10px 24px rgba(253,181,21,.28); }
+.btn-gold {
+    background: var(--gold); 
+    color: var(--maroon-dark); 
+    box-shadow: 0 10px 24px rgba(253,181,21,.28); 
+}
 .btn-outline { background: #fff; color: var(--maroon); border: 1px solid rgba(122,0,25,.22); }
 .btn-danger { background: var(--danger); color: #fff; }
 .btn-small { padding: 8px 11px; border-radius: 10px; font-size: 12px; }
@@ -310,7 +315,15 @@ select { min-height: 50px; }
 option { white-space: normal; }
 textarea { min-height: 110px; resize: vertical; }
 input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(253,181,21,.16); }
-.form-actions { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.form-actions {
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+    gap: 10px; 
+    margin-top: 18px; 
+    flex-wrap: wrap; 
+}
+
 .filter-bar { margin-bottom: 18px; }
 .filter-bar .form-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 .selectable-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -326,7 +339,17 @@ input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shado
 .flash-warning { background: var(--warning-bg); color: var(--warning); }
 .flash-info { background: var(--info-bg); color: var(--info); }
 .empty { text-align: center; color: var(--muted); padding: 34px; }
-.footer { min-height: 68px; padding: 18px 2.5vw; color: #fff; background: var(--maroon-dark); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.footer {
+    min-height: 68px; 
+    padding: 18px 2.5vw; 
+    color: #fff; 
+    background: var(--maroon-dark); 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between; 
+    gap: 12px; flex-wrap: wrap; 
+    font-size: 14px; 
+}
 
 .notice-card { background: var(--gold-soft); border: 1px solid #F3D473; color: var(--maroon-dark); padding: 16px; border-radius: 18px; line-height: 1.55; }
 .subtle { color: var(--muted); }
