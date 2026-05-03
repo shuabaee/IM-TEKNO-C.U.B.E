@@ -154,4 +154,14 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', applyFilter);
         applyFilter();
     });
+
+    const flashes = document.querySelectorAll('.flash');
+    if (flashes.length > 0) {
+        flashes.forEach(flash => {
+            setTimeout(() => {
+                flash.classList.add('is-hiding');
+                flash.addEventListener('animationend', () => flash.remove());
+            }, 3500); // Wait 3.5 seconds
+        });
+    }
 });
