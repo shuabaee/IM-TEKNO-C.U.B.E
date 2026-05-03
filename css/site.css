@@ -194,8 +194,8 @@ main { min-height: calc(100vh - 145px); }
     gap: 8px;
     border: 0;
     border-radius: 13px;
-    padding: 13px 100px;
-    font-size: 16px;
+    padding: 13px 120px;
+    font-size: 14px;
     font-weight: 900;
     cursor: pointer;
     transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
