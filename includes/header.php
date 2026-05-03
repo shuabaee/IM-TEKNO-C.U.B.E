@@ -14,7 +14,7 @@ $pageTitle = $pageTitle ?? 'TEKNO C.U.B.E.';
 <body>
 <header class="topbar">
     <a class="brand" href="<?= url('index.php') ?>">
-        <img src="<?= url('images/tekno-cube-logo.svg') ?>" alt="TEKNO C.U.B.E. logo">
+        <img src="<?= url('images/TEKNO C.U.B.E 1.png') ?>" alt="TEKNO C.U.B.E. logo">
         <span>TEKNO C.U.B.E.</span>
     </a>
     <button class="nav-toggle" type="button" data-menu-toggle>Menu</button>
