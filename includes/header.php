@@ -9,7 +9,7 @@ $pageTitle = $pageTitle ?? 'TEKNO C.U.B.E.';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= h($pageTitle) ?> | TEKNO C.U.B.E.</title>
-    <link rel="stylesheet" href="<?= url('css/site.css') ?>">
+    <link rel="stylesheet" href="<?= url('css/site.css?v=' . time()) ?>">
 </head>
 <body>
 <header class="topbar">
@@ -25,9 +25,11 @@ $pageTitle = $pageTitle ?? 'TEKNO C.U.B.E.';
             <a href="<?= url('dashboard.php') ?>">Dashboard</a>
             <?php if (($user['UserType'] ?? '') === 'Admin'): ?>
                 <a href="<?= url('admin/users/index.php') ?>">Users</a>
+                <a href="<?= url('admin/departments/index.php') ?>">Departments</a>
                 <a href="<?= url('admin/inventory/index.php') ?>">Inventory</a>
                 <a href="<?= url('admin/returns/index.php') ?>">Student Returns</a>
                 <a href="<?= url('admin/reservations/index.php') ?>">Instructor Returns</a>
+                <a href="<?= url('admin/liabilities/index.php') ?>">Settlement and Unblocking</a>
             <?php elseif (($user['UserType'] ?? '') === 'Student'): ?>
                 <a href="<?= url('student/available_items.php') ?>">Available Items</a>
                 <a href="<?= url('student/breakage_reports.php') ?>">Breakage Reports</a>

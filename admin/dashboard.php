@@ -78,7 +78,7 @@ require_once ROOT_PATH . '/includes/header.php';
                             <tr>
                                 <td><?= h($row['UserID']) ?></td>
                                 <td><?= h($row['FirstName'] . ' ' . $row['LastName']) ?></td>
-                                <td><span class="badge <?= $row['UserType'] === 'Admin' ? 'badge-danger' : 'badge-warning' ?>"><?= h($row['UserType']) ?></span></td>
+                                <td><span class="badge <?= $row['UserType'] === 'Admin' ? 'badge-danger' : ($row['UserType'] === 'Student' ? 'badge-info' : 'badge-warning') ?>"><?= h($row['UserType']) ?></span></td>
                                 <td><?= h($row['Email']) ?></td>
                             </tr>
                         <?php endwhile; ?>
@@ -87,12 +87,12 @@ require_once ROOT_PATH . '/includes/header.php';
                 </div>
             </div>
             <div class="panel">
-                <div class="page-head" style="margin-bottom:14px;">
-                    <div>
-                        <h2 style="margin:0;">Student Return Inspections</h2>
-                        <p>Borrowed items that students already requested to return.</p>
+                <div class="page-head" style="margin-bottom:14px; flex-direction:column; align-items:flex-start;">
+                    <div style="width:100%;">
+                        <h2 style="margin-bottom: 10px;">Student Return Inspections</h2>
+                        <p style="margin-bottom: 5px;">Borrowed items that students already requested to return.</p>
                     </div>
-                    <a class="btn btn-outline" href="<?= url('admin/returns/index.php') ?>">Open</a>
+                    <a class="btn btn-outline" style="align-self:center;" href="<?= url('admin/returns/index.php') ?>">Open</a>
                 </div>
                 <div class="table-wrap">
                     <table>
@@ -116,12 +116,12 @@ require_once ROOT_PATH . '/includes/header.php';
         </div>
         <div class="grid-2" style="margin-top:18px;">
             <div class="panel">
-                <div class="page-head" style="margin-bottom:14px;">
-                    <div>
-                        <h2 style="margin:0;">Instructor Return Requests</h2>
-                        <p>Reservation batches waiting for actual return confirmation.</p>
+                <div class="page-head" style="margin-bottom:14px; flex-direction:column; align-items:flex-start;">
+                    <div style="width:100%;">
+                        <h2 style="margin-bottom: 10px;">Instructor Return Requests</h2>
+                        <p style="margin-bottom: 5px;">Reservation batches waiting for actual return confirmation.</p>
                     </div>
-                    <a class="btn btn-outline" href="<?= url('admin/reservations/index.php') ?>">Open</a>
+                    <a class="btn btn-outline" style="align-self:center;" href="<?= url('admin/reservations/index.php') ?>">Open</a>
                 </div>
                 <div class="table-wrap">
                     <table>
@@ -143,12 +143,12 @@ require_once ROOT_PATH . '/includes/header.php';
                 </div>
             </div>
             <div class="panel">
-                <div class="page-head" style="margin-bottom:14px;">
-                    <div>
-                        <h2 style="margin:0;">Pending Settlements</h2>
-                        <p>Student and instructor breakage reports are shown here. Student accounts are unblocked when all student reports are resolved.</p>
+                <div class="page-head" style="margin-bottom:14px; flex-direction:column; align-items:flex-start;">
+                    <div style="width:100%;">
+                        <h2 style="margin-bottom: 10px;">Pending Settlements</h2>
+                        <p style="margin-bottom: 5px;">Student and instructor breakage reports are shown here. Student accounts are unblocked when all student reports are resolved.</p>
                     </div>
-                    <a class="btn btn-outline" href="<?= url('admin/liabilities/index.php') ?>">Open Settlement Page</a>
+                    <a class="btn btn-outline" style="align-self:center;" href="<?= url('admin/liabilities/index.php') ?>">Open Settlement Page</a>
                 </div>
                 <div class="table-wrap">
                     <table>

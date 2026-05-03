@@ -115,4 +115,43 @@ document.addEventListener('DOMContentLoaded', () => {
         select.addEventListener('change', update);
         update();
     });
+
+    document.querySelectorAll('[data-live-search]').forEach((form) => {
+        const input = form.querySelector('input[name="q"]');
+        if (!input) return;
+
+        form.addEventListener('submit', (event) => event.preventDefault());
+        input.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
+
+        const panel = form.closest('.panel');
+        const table = panel ? panel.querySelector('table') : null;
+        const tbody = table ? table.querySelector('tbody') : null;
+        if (!tbody) return;
+
+        const rows = Array.from(tbody.querySelectorAll('tr')).filter((row) => !row.matches('[data-live-search-empty]'));
+        const emptyRow = tbody.querySelector('[data-live-search-empty]');
+
+        const applyFilter = () => {
+            const term = input.value.trim().toLowerCase();
+            let visibleRows = 0;
+
+            rows.forEach((row) => {
+                const match = term === '' || row.textContent.toLowerCase().includes(term);
+                row.style.display = match ? '' : 'none';
+                if (match) visibleRows += 1;
+            });
+
+            if (emptyRow) {
+                emptyRow.style.display = visibleRows === 0 ? '' : 'none';
+            }
+        };
+
+        // 'input' event covers typing, pasting, clearing, making 'keyup' and 'change' redundant.
+        input.addEventListener('input', applyFilter);
+        applyFilter();
+    });
 });

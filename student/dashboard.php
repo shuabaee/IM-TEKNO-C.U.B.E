@@ -98,7 +98,7 @@ require_once ROOT_PATH . '/includes/header.php';
             <form method="get" class="form-grid">
                 <div>
                     <label for="status">Filter by Status</label>
-                    <select id="status" name="status">
+                    <select id="status" name="status" onchange="this.form.submit()">
                         <option value="">All Statuses</option>
                         <?php foreach ($allowedStatuses as $value): ?>
                             <option value="<?= h($value) ?>" <?= $status === $value ? 'selected' : '' ?>><?= h($value) ?></option>
@@ -107,7 +107,7 @@ require_once ROOT_PATH . '/includes/header.php';
                 </div>
                 <div>
                     <label for="sort">Sort Column</label>
-                    <select id="sort" name="sort">
+                    <select id="sort" name="sort" onchange="this.form.submit()">
                         <option value="borrowed" <?= $sort === 'borrowed' ? 'selected' : '' ?>>Borrowed Date</option>
                         <option value="due" <?= $sort === 'due' ? 'selected' : '' ?>>Due Date</option>
                         <option value="returned" <?= $sort === 'returned' ? 'selected' : '' ?>>Return Date</option>
@@ -115,14 +115,13 @@ require_once ROOT_PATH . '/includes/header.php';
                 </div>
                 <div>
                     <label for="dir">Sort Direction</label>
-                    <select id="dir" name="dir">
+                    <select id="dir" name="dir" onchange="this.form.submit()">
                         <option value="desc" <?= strtoupper($dir) === 'DESC' ? 'selected' : '' ?>>Newest / Highest First</option>
                         <option value="asc" <?= strtoupper($dir) === 'ASC' ? 'selected' : '' ?>>Oldest / Lowest First</option>
                     </select>
                 </div>
                 <div class="form-actions" style="justify-content:flex-start;margin-top:20px;">
-                    <button class="btn btn-primary" type="submit">Apply</button>
-                    <a class="btn btn-outline" href="<?= url('student/dashboard.php') ?>">Reset</a>
+                    <a class="btn btn-outline" href="<?= url('student/dashboard.php') ?>">Reset Filters</a>
                 </div>
             </form>
         </div>

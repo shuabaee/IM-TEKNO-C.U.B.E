@@ -87,11 +87,11 @@ require_once ROOT_PATH . '/includes/header.php';
             <form method="get" class="form-grid">
                 <div>
                     <label for="search">Search Item</label>
-                    <input id="search" type="text" name="search" value="<?= h($search) ?>" placeholder="Oscilloscope, cable tester, microscope">
+                    <input id="search" type="text" name="search" value="<?= h($search) ?>" placeholder="Oscilloscope, cable tester, microscope" onchange="this.form.submit()">
                 </div>
                 <div>
                     <label for="type">Filter by Type</label>
-                    <select id="type" name="type">
+                    <select id="type" name="type" onchange="this.form.submit()">
                         <option value="">All Types</option>
                         <option value="Returnable" <?= $type === 'Returnable' ? 'selected' : '' ?>>Returnable</option>
                         <option value="Reusable" <?= $type === 'Reusable' ? 'selected' : '' ?>>Reusable</option>
@@ -100,7 +100,7 @@ require_once ROOT_PATH . '/includes/header.php';
                 </div>
                 <div>
                     <label for="condition">Filter by Condition</label>
-                    <select id="condition" name="condition">
+                    <select id="condition" name="condition" onchange="this.form.submit()">
                         <option value="">All Borrowable Conditions</option>
                         <option value="Good" <?= $condition === 'Good' ? 'selected' : '' ?>>Good</option>
                         <option value="Worn" <?= $condition === 'Worn' ? 'selected' : '' ?>>Worn</option>
@@ -108,7 +108,7 @@ require_once ROOT_PATH . '/includes/header.php';
                 </div>
                 <div>
                     <label for="department">Filter by Department</label>
-                    <select id="department" name="department">
+                    <select id="department" name="department" onchange="this.form.submit()">
                         <option value="">All Departments</option>
                         <?php while ($d = $departments->fetch_assoc()): ?>
                             <option value="<?= h($d['DepartmentID']) ?>" <?= $department === $d['DepartmentID'] ? 'selected' : '' ?>><?= h(department_code($d['DepartmentID']) . ' | ' . department_short_name($d['DepartmentID'])) ?></option>
@@ -117,14 +117,13 @@ require_once ROOT_PATH . '/includes/header.php';
                 </div>
                 <div>
                     <label for="qty_sort">Sort by Available Quantity</label>
-                    <select id="qty_sort" name="qty_sort">
+                    <select id="qty_sort" name="qty_sort" onchange="this.form.submit()">
                         <option value="desc" <?= $qtySort === 'DESC' ? 'selected' : '' ?>>Highest Quantity First</option>
                         <option value="asc" <?= $qtySort === 'ASC' ? 'selected' : '' ?>>Lowest Quantity First</option>
                     </select>
                 </div>
                 <div class="form-actions" style="justify-content:flex-start;margin-top:20px;">
-                    <button class="btn btn-primary" type="submit">Apply Filters</button>
-                    <a class="btn btn-outline" href="<?= url('student/available_items.php') ?>">Reset</a>
+                    <a class="btn btn-outline" href="<?= url('student/available_items.php') ?>">Reset Filters</a>
                 </div>
             </form>
         </div>

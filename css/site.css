@@ -333,7 +333,11 @@ input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shado
 .item-select-card small { color: var(--muted); line-height: 1.4; }
 .quantity-row { display: grid; grid-template-columns: 1fr 140px; gap: 12px; align-items: end; }
 
-.flash { width: min(1380px, 96vw); margin: 18px auto 0; padding: 14px 16px; border-radius: 16px; font-weight: 800; }
+@keyframes slideDownFlash {
+    from { transform: translate(-50%, -20px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+.flash { width: max-content; max-width: min(600px, 94vw); padding: 14px 24px; border-radius: 12px; font-weight: 800; position: fixed; top: 96px; left: 50%; transform: translateX(-50%); z-index: 9999; box-shadow: 0 10px 32px rgba(0,0,0,0.12); animation: slideDownFlash 0.3s ease-out forwards; text-align: center; }
 .flash-success { background: var(--success-bg); color: var(--success); }
 .flash-danger { background: var(--danger-bg); color: var(--danger); }
 .flash-warning { background: var(--warning-bg); color: var(--warning); }
