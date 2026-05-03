@@ -34,7 +34,7 @@ require_once ROOT_PATH . '/includes/header.php';
         <input id="user_id" name="user_id" type="text" placeholder="ADMIN-001" required>
         <label for="password">Password</label>
         <input id="password" name="password" type="password" placeholder="Password" required>
-        <div class="form-actions">
+        <div class="form-actions form-actions-center">
             <button class="btn btn-gold" type="submit">Login</button>
         </div>
         <p style="margin-top:18px">Default admin: <strong>ADMIN-001</strong> / <strong>admin123</strong></p>
