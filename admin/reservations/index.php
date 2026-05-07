@@ -11,6 +11,14 @@ if (!in_array($statusFilter, $allowed, true)) {
 
 refresh_future_reservation_conflicts($connection);
 
+$sort = trim($_GET['sort'] ?? '') ?: 'schedule';
+$dir = strtolower(trim($_GET['dir'] ?? '')) === 'asc' ? 'ASC' : 'DESC';
+$sortMap = [
+    'schedule' => 'rb.ScheduleDate',
+    'status' => "FIELD(rb.ReservationStatus, 'Return Requested', 'Reserved', 'Returned', 'Cancelled')"
+];
+$orderBy = $sortMap[$sort] ?? $sortMap['schedule'];
+
 $where = '';
 if ($statusFilter === 'At Risk') {
     $where = "WHERE rb.ConflictStatus = 'At Risk' AND rb.ReservationStatus IN ('Reserved','Return Requested')";
@@ -27,8 +35,15 @@ $sql = "SELECT rb.BatchID, rb.ScheduleDate, rb.StartTime, rb.EndTime, rb.Purpose
     LEFT JOIN Inventory_item ii ON ri.AssetNumber = ii.AssetNumber
     {$where}
     GROUP BY rb.BatchID
-    ORDER BY FIELD(rb.ReservationStatus, 'Return Requested', 'Reserved', 'Returned', 'Cancelled'), rb.ScheduleDate DESC, rb.StartTime DESC";
+    ORDER BY {$orderBy} {$dir}, rb.StartTime DESC";
 $reservations = $connection->query($sql);
+
+function sort_link_inst_returns(string $key, string $label, string $currentSort, string $currentDir, string $statusFilter): string {
+    $nextDir = ($currentSort === $key && strtoupper($currentDir) === 'ASC') ? 'desc' : 'asc';
+    $indicator = $currentSort === $key ? (strtoupper($currentDir) === 'ASC' ? ' ↑' : ' ↓') : '';
+    return '<a href="?status=' . urlencode($statusFilter) . '&sort=' . urlencode($key) . '&dir=' . urlencode($nextDir) . '">' . h($label . $indicator) . '</a>';
+}
+
 require_once ROOT_PATH . '/includes/header.php';
 ?>
 <div class="layout">
@@ -44,27 +59,26 @@ require_once ROOT_PATH . '/includes/header.php';
             <form method="get" class="form-grid">
                 <div>
                     <label for="status">Filter by Reservation Status</label>
-                    <select id="status" name="status">
+                    <select id="status" name="status" onchange="this.form.submit()">
                         <?php foreach ($allowed as $status): ?>
                             <option value="<?= h($status) ?>" <?= $statusFilter === $status ? 'selected' : '' ?>><?= h($status) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="form-actions" style="justify-content:flex-start;margin-top:20px;">
-                    <button class="btn btn-primary" type="submit">Apply</button>
-                    <a class="btn btn-outline" href="<?= url('admin/reservations/index.php') ?>">Reset</a>
-                </div>
             </form>
         </div>
         <div class="panel table-wrap">
+            <form class="form-actions" data-live-search style="justify-content:flex-start;margin-top:0;margin-bottom:14px;padding: 16px 16px 0;">
+                <input name="q" placeholder="Search batch ID, instructor, or item" style="max-width:500px; width: 100%;">
+            </form>
             <table>
                 <thead>
                     <tr>
                         <th>Batch</th>
                         <th>Instructor</th>
-                        <th>Schedule</th>
+                        <th><?= sort_link_inst_returns('schedule', 'Schedule', $sort, $dir, $statusFilter) ?></th>
                         <th>Reserved Items</th>
-                        <th>Status</th>
+                        <th><?= sort_link_inst_returns('status', 'Status', $sort, $dir, $statusFilter) ?></th>
                         <th>Availability</th>
                         <th>Action</th>
                     </tr>

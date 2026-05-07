@@ -29,12 +29,13 @@ require_once ROOT_PATH . '/includes/header.php';
 <section class="auth-wrap">
     <form class="auth-card" method="post">
         <h1>Welcome Back</h1>
-        <p>Login using your CIT-U barcode or User ID.</p>
+        <p style="margin-bottom: 30px;">Login using your CIT-U User ID.</p>
         <label for="user_id">User ID</label>
-        <input id="user_id" name="user_id" type="text" placeholder="ADMIN-001" required>
+        <input id="user_id" name="user_id" type="text" placeholder="ADMIN-001"
+        style="margin-bottom: 12px;" required>
         <label for="password">Password</label>
         <input id="password" name="password" type="password" placeholder="Password" required>
-        <div class="form-actions">
+        <div class="form-actions form-actions-center">
             <button class="btn btn-gold" type="submit">Login</button>
         </div>
         <p style="margin-top:18px">Default admin: <strong>ADMIN-001</strong> / <strong>admin123</strong></p>

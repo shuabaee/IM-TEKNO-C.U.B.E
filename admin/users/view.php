@@ -25,7 +25,7 @@ require_once ROOT_PATH . '/includes/header.php';
         <div class="panel">
             <div class="form-grid">
                 <div><label>User ID</label><p><?= h($record['UserID']) ?></p></div>
-                <div><label>Role</label><p><span class="badge badge-warning"><?= h($record['UserType']) ?></span></p></div>
+                <div><label>Role</label><p><span class="badge <?= $record['UserType'] === 'Admin' ? 'badge-danger' : ($record['UserType'] === 'Student' ? 'badge-info' : 'badge-warning') ?>"><?= h($record['UserType']) ?></span></p></div>
                 <div><label>Name</label><p><?= h($record['FirstName'] . ' ' . $record['LastName']) ?></p></div>
                 <div><label>Email</label><p><?= h($record['Email']) ?></p></div>
                 <?php if ($record['UserType'] === 'Student' && $extra): ?>

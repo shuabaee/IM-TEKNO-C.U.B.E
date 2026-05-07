@@ -62,7 +62,7 @@ require_once ROOT_PATH . '/includes/header.php';
 <section class="auth-wrap">
     <form class="auth-card auth-card-wide" method="post">
         <h1>Create Account</h1>
-        <p>Register as a student or instructor. Admin accounts are created only by an existing admin.</p>
+        <p style="margin-bottom: 30px;">Register as a student or instructor. Admin accounts are created only by an existing admin.</p>
         <div class="form-grid">
             <div>
                 <label for="user_id">User ID</label>
@@ -101,7 +101,7 @@ require_once ROOT_PATH . '/includes/header.php';
                     <?php render_course_options($selectedDepartment, $selectedCourse); ?>
                 </select>
             </div>
-            <div data-student-fields>
+            <div data-student-fields class="form-full">
                 <label for="enrollment_status">Enrollment Status</label>
                 <select id="enrollment_status" name="enrollment_status">
                     <option value="Officially Enrolled" <?= ($_POST['enrollment_status'] ?? '') === 'Officially Enrolled' ? 'selected' : '' ?>>Officially Enrolled</option>

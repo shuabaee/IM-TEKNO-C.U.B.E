@@ -11,6 +11,22 @@ if (!in_array($statusFilter, $allowedStatus, true)) {
     $statusFilter = 'pending';
 }
 
+$sortS = trim($_GET['sort_s'] ?? '') ?: 'date';
+$dirS = strtolower(trim($_GET['dir_s'] ?? '')) === 'asc' ? 'ASC' : 'DESC';
+$sortMapS = [
+    'date' => 'br.DateGenerated',
+    'status' => "FIELD(br.SettlementStatus, 'Pending', 'Paid')"
+];
+$orderByS = $sortMapS[$sortS] ?? $sortMapS['date'];
+
+$sortI = trim($_GET['sort_i'] ?? '') ?: 'date';
+$dirI = strtolower(trim($_GET['dir_i'] ?? '')) === 'asc' ? 'ASC' : 'DESC';
+$sortMapI = [
+    'date' => 'rbr.DateGenerated',
+    'status' => "FIELD(rbr.SettlementStatus, 'Pending', 'Paid')"
+];
+$orderByI = $sortMapI[$sortI] ?? $sortMapI['date'];
+
 $studentWhere = '';
 $instructorWhere = '';
 if ($statusFilter === 'pending') {
@@ -32,7 +48,7 @@ $studentReports = $connection->query("SELECT br.ReportNumber, br.DateGenerated, 
     JOIN Inventory_item i ON bt.AssetNumber = i.AssetNumber
     LEFT JOIN Student s ON bt.UserID = s.UserID
     {$studentWhere}
-    ORDER BY FIELD(br.SettlementStatus, 'Pending', 'Paid'), br.DateGenerated DESC, br.ReportNumber DESC");
+    ORDER BY {$orderByS} {$dirS}, br.ReportNumber DESC");
 
 $instructorReports = $connection->query("SELECT rbr.ReportNumber, rbr.DateGenerated, rbr.QuantityMissing, rbr.QuantityDamaged, rbr.PenaltyFeeAmount, rbr.DamageDescription, rbr.SettlementStatus,
         rb.BatchID, rb.UserID AS InstructorID,
@@ -43,7 +59,25 @@ $instructorReports = $connection->query("SELECT rbr.ReportNumber, rbr.DateGenera
     JOIN `User` u ON rb.UserID = u.UserID
     JOIN Inventory_item i ON rbr.AssetNumber = i.AssetNumber
     {$instructorWhere}
-    ORDER BY FIELD(rbr.SettlementStatus, 'Pending', 'Paid'), rbr.DateGenerated DESC, rbr.ReportNumber DESC");
+    ORDER BY {$orderByI} {$dirI}, rbr.ReportNumber DESC");
+
+function sort_link_liab(string $key, string $label, string $currentSort, string $currentDir, string $statusFilter, string $type, string $otherSort, string $otherDir): string {
+    $nextDir = ($currentSort === $key && strtoupper($currentDir) === 'ASC') ? 'desc' : 'asc';
+    $indicator = $currentSort === $key ? (strtoupper($currentDir) === 'ASC' ? ' ↑' : ' ↓') : '';
+    $params = ['status' => $statusFilter];
+    if ($type === 'student') {
+        $params['sort_s'] = $key;
+        $params['dir_s'] = $nextDir;
+        $params['sort_i'] = $otherSort;
+        $params['dir_i'] = $otherDir;
+    } else {
+        $params['sort_i'] = $key;
+        $params['dir_i'] = $nextDir;
+        $params['sort_s'] = $otherSort;
+        $params['dir_s'] = $otherDir;
+    }
+    return '<a href="?'.http_build_query($params).'">' . h($label . $indicator) . '</a>';
+}
 
 require_once ROOT_PATH . '/includes/header.php';
 ?>
@@ -61,15 +95,11 @@ require_once ROOT_PATH . '/includes/header.php';
             <form method="get" class="form-grid">
                 <div>
                     <label for="status">Filter by Report Status</label>
-                    <select id="status" name="status">
+                    <select id="status" name="status" onchange="this.form.submit()">
                         <option value="pending" <?= $statusFilter === 'pending' ? 'selected' : '' ?>>Pending</option>
                         <option value="resolved" <?= $statusFilter === 'resolved' ? 'selected' : '' ?>>Resolved</option>
                         <option value="all" <?= $statusFilter === 'all' ? 'selected' : '' ?>>All</option>
                     </select>
-                </div>
-                <div class="form-actions" style="justify-content:flex-start;margin-top:20px;">
-                    <button class="btn btn-primary" type="submit">Apply</button>
-                    <a class="btn btn-outline" href="<?= url('admin/liabilities/index.php') ?>">Reset</a>
                 </div>
             </form>
         </div>
@@ -82,9 +112,9 @@ require_once ROOT_PATH . '/includes/header.php';
                         <th>Report</th>
                         <th>Borrower</th>
                         <th>Item</th>
-                        <th>Date Generated</th>
+                        <th><?= sort_link_liab('date', 'Date Generated', $sortS, $dirS, $statusFilter, 'student', $sortI, $dirI) ?></th>
                         <th>Penalty</th>
-                        <th>Report Status</th>
+                        <th><?= sort_link_liab('status', 'Report Status', $sortS, $dirS, $statusFilter, 'student', $sortI, $dirI) ?></th>
                         <th>Account Status</th>
                         <th>Action</th>
                     </tr>
@@ -140,10 +170,10 @@ require_once ROOT_PATH . '/includes/header.php';
                         <th>Instructor</th>
                         <th>Batch</th>
                         <th>Item</th>
-                        <th>Date Generated</th>
+                        <th><?= sort_link_liab('date', 'Date Generated', $sortI, $dirI, $statusFilter, 'instructor', $sortS, $dirS) ?></th>
                         <th>Penalty Basis</th>
                         <th>Penalty</th>
-                        <th>Report Status</th>
+                        <th><?= sort_link_liab('status', 'Report Status', $sortI, $dirI, $statusFilter, 'instructor', $sortS, $dirS) ?></th>
                         <th>Action</th>
                     </tr>
                 </thead>

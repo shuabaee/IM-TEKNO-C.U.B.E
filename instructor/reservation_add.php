@@ -161,16 +161,12 @@ require_once ROOT_PATH . '/includes/header.php';
             <form method="get" class="form-grid">
                 <div>
                     <label for="department">Filter Items by Department</label>
-                    <select id="department" name="department">
+                    <select id="department" name="department" onchange="this.form.submit()">
                         <option value="">All College Departments</option>
                         <?php while ($d = $departmentOptions->fetch_assoc()): ?>
                             <option value="<?= h($d['DepartmentID']) ?>" <?= $departmentFilter === $d['DepartmentID'] ? 'selected' : '' ?>><?= h(department_code($d['DepartmentID']) . ' | ' . department_short_name($d['DepartmentID'])) ?></option>
                         <?php endwhile; ?>
                     </select>
-                </div>
-                <div class="form-actions" style="justify-content:flex-start;margin-top:20px;">
-                    <button class="btn btn-primary" type="submit">Filter Items</button>
-                    <a class="btn btn-outline" href="<?= url('instructor/reservation_add.php') ?>">Reset</a>
                 </div>
             </form>
         </div>
